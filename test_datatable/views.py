@@ -72,11 +72,8 @@ def ajaxTable(request):
                     Q(**{field + '__icontains': search_text})
                 )
             filter_text = request.GET.get(field+'filter')
-            print(filter_text)
             if filter_text:
                 filter_type = request.GET.get(field+'filtertype')
-                print(field)
-                print(filter_type)
                 if filter_type == '0':
                     studies = studies.filter(
                         Q(**{field + '__iexact': filter_text})
