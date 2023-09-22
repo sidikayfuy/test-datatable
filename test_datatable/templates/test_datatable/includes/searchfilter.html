@@ -1,0 +1,35 @@
+<ul class="nav nav-pills mb-3" id="{{ field.0 }}-tab" role="tablist">
+    <li class="nav-item" role="presentation">
+        <button class="nav-link search-button active" id="{{ field.0 }}-search-tab-button" data-bs-toggle="pill" data-bs-target="#{{ field.0 }}search" type="button" role="tab" aria-controls="{{ field.0 }}search-tab" aria-selected="true">Поиск</button>
+    </li>
+    <li class="nav-item" role="presentation">
+        <button class="nav-link filter-button" id="{{ field.0 }}-filter-tab-button" data-bs-toggle="pill" data-bs-target="#{{ field.0 }}filter" type="button" role="tab" aria-controls="{{ field.0 }}filter-tab" aria-selected="false">Фильтр</button>
+    </li>
+</ul>
+<div class="tab-content" id="{{ field.0 }}-tabContent">
+    <div class="tab-pane fade show active" id="{{ field.0 }}search" role="tabpanel" aria-labelledby="{{ field.0 }}search-tab">
+        <input type="{% if field.1 == 'DateField' %}date{% elif field.1 == 'DateTimeField' %}datetime-local{% else %}text{% endif %}" id="{{ field.0 }}searchInput" class="form-control search-input" placeholder="{{ field.2 }}">
+    </div>
+
+    <div class="tab-pane fade" id="{{ field.0 }}filter" role="tabpanel" aria-labelledby="{{ field.0 }}filter-tab">
+        <select class="form-select filter-type">
+            {% if field.1 == 'DateField' or field.1 == 'DateTimeField' %}
+                <option value="0" selected>Не равно</option>
+                <option value="1">До</option>
+                <option value="2">После</option>
+                <option value="3">Между</option>
+                <option value="4">Исключая промежуток между</option>
+            {% else %}
+                <option value="0" selected>Равно</option>
+                <option value="1">Не равно</option>
+                <option value="2">Начинается с</option>
+                <option value="3">Заканчивается на</option>
+                <option value="4">Не содержит</option>
+            {% endif %}
+        </select>
+        <input type="{% if field.1 == 'DateField' %}date{% elif field.1 == 'DateTimeField' %}datetime-local{% else %}text{% endif %}" id="{{ field.0 }}filterInput" class="form-control filter-input mt-2" placeholder="{{ field.2 }}">
+        <div class="text-center">
+            <button class="btn btn-primary mt-2 submit-filter">Применить</button>
+        </div>
+    </div>
+</div>
